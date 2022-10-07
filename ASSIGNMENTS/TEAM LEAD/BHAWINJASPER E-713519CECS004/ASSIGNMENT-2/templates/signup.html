@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>LOGIN PAGE</title>
+
+
+</head>
+<body >
+    <div class="container" id="main">
+        <form action="/signup" method="POST">
+            <h4>SIGN PAGE</h4>
+            ENETER MAIL-ID:
+            <input name="mail" type="email" class="form-control" value="" placeholder="example@gmail.com" required><br>
+            ENTER USER NAME:
+            <input name="name" type="text" class="form-control" value="" placeholder="@xyz" required><br>
+            ENTER YOUR PH NO:
+            <input name="ph" type="tel" class="form-control" value="" required ><br>
+            ENETER YOUR PASSWORD:
+            <input name="pass" type="text"  class="form-control" value="" placeholder="password" required><br>
+            <input type="submit" class="btn btn-primary" value="SIGNUP"><br><br>
+            <a href="/login">IF YOUR ACCOUNT EXIST ALREADY ? LOGIN HERE</a>
+        </form>
+    </div>
+</body>
+</html>
