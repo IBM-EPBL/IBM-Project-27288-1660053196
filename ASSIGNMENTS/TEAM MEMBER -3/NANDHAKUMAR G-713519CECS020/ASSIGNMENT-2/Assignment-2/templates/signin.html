@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>signin page</title>
+<style>
+
+     body{
+
+        background-color: blueviolet;
+     }
+</style>
+
+
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div id="heading">
+    <h1 align="center">Login Here!!</h1>
+    </div>
+    <div id="table">
+    <table border="2px" cellpadding="8" bgcolor="ORANGE" align="center">
+    <tr><td>
+    <form method="POST" action="/signin">
+    Enter User Name : <input type="text"/>
+    <br><br>
+    Enter Password : <input type="text" id="password"/>
+    <br><br>
+    <input type="submit" value="Login"/>
+    </form>
+    <br><br>
+    <a href="signup.html">New User</a>
+    </td>
+    </tr>
+    </table>
+    </div>
+
+</body>
+{% endblock %}
