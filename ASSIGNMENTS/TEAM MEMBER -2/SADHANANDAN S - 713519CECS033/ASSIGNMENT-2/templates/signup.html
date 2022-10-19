@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>signup page</title>
+
+<style>
+
+    body{
+
+       background-color: lightslategray;
+    }
+</style>
+
+
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <h1 align="center">Register Here!!</h1>
+    <table border="2px" align="center" cellpadding="8" bgcolor="pink">
+    <tr>
+    <td>
+    <form method="POST" action="/signup">
+    User Id : <input type="text" id="userId"/>
+    <br><br>
+    Password : <input type="password" id="password"/>
+    <br><br>
+    Date Of Birth : <input type="date" id="dob"/>
+    <br><br>
+    Gender : <input type="radio" name="gender" value="male"/>Male
+    <input type="radio" name="gender" value="female"/>Female
+    <input type="radio" name="gender" value="others"/>Others
+    <br><br>
+    State :<select>
+    <option>Select One</option>
+    <option>Tamil Nadu</option>
+    <option>Kerala</option>
+    <option>Karnataka</option>
+    <option>Andhra Pradesh</option>
+    <option>Maharashtra</option>
+    </select>
+    <br><br>
+    Contact Number : <input type="number" id="contact"/>
+    <br><br>
+    Addresss : <textarea name="address" rows=2 cols=40></textarea>
+    <br><br>
+    <input type="submit" value="Submit"/>
+    <input type="submit" value="Reset"/>
+    <br><br>
+    </form>
+    </table>
+    </body>
+
+{% endblock %}
