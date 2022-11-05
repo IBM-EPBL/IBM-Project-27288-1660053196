@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inventory management register page</title>
+    <title>Inventory management subuser register page</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      var mailid=""
-      
 
         function loadDoc(value) {
 
@@ -22,49 +20,15 @@
   xhttp.send("fname="+value);
      }
        function loadDoc1(value) {
-              mailid=value
-            
+
       const xhttp = new XMLHttpRequest();
       xhttp.onload = function() {
           document.getElementById("vl2").innerHTML=this.responseText;
-          if( document.getElementById("vl2").innerHTML==""){
-           var x = document.createElement("INPUT");
-          var y=document.createElement("br")
-          var z=document.createElement("p")
-            z.setAttribute("id","otpp") 
-            x.setAttribute("type", "password");
-            x.setAttribute("placeholder","enter 4 digit otp")
-            x.setAttribute("class","form-control")
-            x.setAttribute("id","otp")
-           document.getElementById("mail").appendChild(x);
-           document.getElementById("mail").appendChild(y);
-           document.getElementById("mail").appendChild(y);
-           document.getElementById("mail").appendChild(z);
-           document.getElementById("mail").appendChild(y);
-            var z1=document.getElementById("otp")
-            z1.addEventListener("focusout",function(){
-              
-              const xhttp = new XMLHttpRequest();
-      xhttp.onload = function() {
-          document.getElementById("otpp").innerHTML=this.responseText;
-          if( document.getElementById("otpp").innerHTML=="otp matched"){
-            document.getElementById("otpp").style.color="green";
-          }else{
-            document.getElementById("otpp").style.color="red";
-          }
-       }
-  xhttp.open("POST", "/verifyotp");
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          
-          xhttp.send("mail="+mailid+"&"+"otp="+this.value);
-            });
-          }
        }
   xhttp.open("POST", "/validationmailid");
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("fname="+value);
      }
-     
        function loadDoc2(value) {
 
       const xhttp = new XMLHttpRequest();
@@ -78,7 +42,6 @@
      var ps=true
      var pasw=""
      function ok(){
-      alert(document.getElementById("otpp").innerHTML)
         if(document.getElementById("vl1").textContent!=""){
           ps=false;
         }
@@ -86,12 +49,6 @@
           ps=false;
         }
         if(document.getElementById("vl3").textContent!=""){
-          ps=false;
-        }
-        if(document.getElementById("vl4").textContent!=""){
-          ps=false;
-        }
-        if(document.getElementById("otpp").innerHTML!="otp matched"){
           ps=false;
         }
        return ps;
@@ -105,7 +62,7 @@
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("fname="+value);
              if(document.getElementById("vl4").textContent==""){
-                pasw=value;
+                 pasw=value;
                  document.getElementById("vl4").innerHTML="";
              }
            if(pasw==value){
@@ -120,23 +77,17 @@
 
      }
 </script>
-
 </head>
 <body>
 <div class="container mt-3" >
     <h3>REGISTER</h3>
-<form action="/mainvalidate" method="post"  onsubmit="return ok()">
-    <input  class="form-control"  type="text" placeholder="username" name="usernm" onfocusout="loadDoc(this.value)" required><p id="vl1" style="color:red">.</p><br><br>
-    <div id="mail">
-    <input  class="form-control"  type="email" placeholder="eneter your maild" name="mail" onfocusout="loadDoc1(this.value)"required><p id="vl2" style="color:red">.</p><br><br>
-    </div>
-    <div id="ph">
-     <input  class="form-control"  type="tel" placeholder="enete your phone number " name="phno" onfocusout="loadDoc2(this.value)"required><p id="vl3" style="color:red">.</p><br><br>
-    </div>
-        <input  class="form-control" type="password" placeholder="Enter your password" name="pass" onfocusout="passwordck(this.value)" required><p id="vl4" style="color:red">.</p><br><br>
+<form action="/subvalidate" method="post" onsubmit="return ok()">
+    <input  class="form-control"  type="text" placeholder="username" name="usernm" onfocusout="loadDoc(this.value)" required><p id="vl1" style="color:red"></p><br><br>
+    <input  class="form-control"  type="email" placeholder="eneter your maild" name="mail" onfocusout="loadDoc1(this.value)"required><p id="vl2" style="color:red"></p><br><br>
+     <input  class="form-control"  type="tel" placeholder="enete your phone number " name="phno" onfocusout="loadDoc2(this.value)"required><p id="vl3" style="color:red"></p><br><br>
+    <input  class="form-control" type="password" placeholder="Enter your password" name="pass" onfocusout="passwordck(this.value)" required><p id="vl4" style="color:red"></p><br><br>
      <input  class="form-control"  type="password" placeholder="confirm password" onfocusout="passwordck(this.value)" required><p id="vl5" style="color:red"></p><br><br>
     <input  class="btn btn-primary" type="submit" value="submit"><br><br>
-    <a href="http://127.0.0.1:5000/">Allready have an account ? login here...</a>
 </form>
 </div>
 

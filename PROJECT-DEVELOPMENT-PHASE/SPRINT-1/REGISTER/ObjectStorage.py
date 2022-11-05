@@ -1,7 +1,7 @@
 import ibm_boto3
 from ibm_botocore.client import Config, ClientError
-import PIL.Image as Image
-import io
+
+
 
 
 COS_ENDPOINT="https://s3.tok.ap.cloud-object-storage.appdomain.cloud"
@@ -75,7 +75,7 @@ def get_item(bucket_name, item_name):
         file = cos.Object(bucket_name, item_name).get()
 
         by=file["Body"].read()
-        return by
+
 
 
     except ClientError as be:
