@@ -1,0 +1,1 @@
+added hub manager dash board, login and registration page for allocating manager for hub's the particular person will have access to only the particular hub alloted by owner.
