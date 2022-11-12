@@ -26,7 +26,7 @@ def validate():
          while result!=False:
             if request.form.__contains__("sub"):
                 if result["USERNAME"] == usernm and result["PASSWORD"] == password and result["SUBUSER"] == 1:
-                    return "under development"
+                    return redirect("http://127.0.0.1:5012/dashboard/"+usernm)
                 else:
                     result = ibm_db.fetch_both(stmt)
             else:

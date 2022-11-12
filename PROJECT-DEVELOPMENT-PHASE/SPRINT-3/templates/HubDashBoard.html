@@ -78,13 +78,10 @@
             var cell5 = row.insertCell(4);
              var a=document.createElement("a");
              a.setAttribute("href","{{'http://127.0.0.1:5001/subregister/%s/'%(name)}}"+ls[x]["HubName"])
-             if(ls[x]["HubManager"]==""){
-              const optionText = document.createTextNode("ADD MANAGER"); 
+             
+              const optionText = document.createTextNode("ADD CO WORKERS");
               a.appendChild(optionText);
-             }else{
-              const optionText = document.createTextNode("CHANGE MANAGER");
-              a.appendChild(optionText);
-             }
+             
             
              
              

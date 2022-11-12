@@ -8,11 +8,13 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+
+      var username=""
       var mailid=""
       
 
         function loadDoc(value) {
-
+         username=value;
       const xhttp = new XMLHttpRequest();
       xhttp.onload = function() {
           document.getElementById("vl1").innerHTML=this.responseText;
@@ -31,6 +33,7 @@
            var x = document.createElement("INPUT");
           var y=document.createElement("br")
           var z=document.createElement("p")
+          var z1=
             z.setAttribute("id","otpp") 
             x.setAttribute("type", "password");
             x.setAttribute("placeholder","enter 4 digit otp")
@@ -78,7 +81,8 @@
      var ps=true
      var pasw=""
      function ok(){
-      alert(document.getElementById("otpp").innerHTML)
+       alert("your data is processing don't click submit button simultaneously");
+
         if(document.getElementById("vl1").textContent!=""){
           ps=false;
         }
@@ -119,14 +123,15 @@
 
 
      }
+
 </script>
 
 </head>
-<body>
+<body >
 <div class="container mt-3" >
     <h3>REGISTER</h3>
 <form action="/mainvalidate" method="post"  onsubmit="return ok()">
-    <input  class="form-control"  type="text" placeholder="username" name="usernm" onfocusout="loadDoc(this.value)" required><p id="vl1" style="color:red">.</p><br><br>
+    <input  class="form-control"  type="text" placeholder="username" name="usernm" onfocusout="loadDoc(this.value)" required><p id="vl1" style="color:red">username should contain only lower case letter and numeric values.</p><br><br>
     <div id="mail">
     <input  class="form-control"  type="email" placeholder="eneter your maild" name="mail" onfocusout="loadDoc1(this.value)"required><p id="vl2" style="color:red">.</p><br><br>
     </div>

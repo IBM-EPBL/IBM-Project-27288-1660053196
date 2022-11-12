@@ -1,12 +1,9 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask,render_template,request
 import json
 import PIL.Image as Image
 import io
 import os
 import ObjectStorage
-import ibm_db
-import TwoStepAuthenticator
-import  re
 
 app = Flask(__name__)
 Hntry={
@@ -33,7 +30,6 @@ Sdetails={
     "suppliedproducts":""
 
 }
-otp={}
 @app.route("/dashboard/<name>")
 def dashboard(name):
    data={name:"you can da "+name}
@@ -82,8 +78,7 @@ def changeprofile(name):
 @app.route("/navforhubentry/<name>",methods=["POST"])
 def navforhubentry(name):
     navnm=request.form["fname"]
-    if(navnm=="Add Hub"):
-     return render_template("addHub.html",name=name)
+
     if (navnm == "AddProductDetails"):
         return render_template("addProduct.html",name=name)
     if (navnm == "AddSupplierDetails"):
@@ -231,99 +226,7 @@ def supplierdetails(name):
         if x["HubName"]==hubname:
             senddata=json.dumps(x["SupplierDetails"])
     return senddata
-@app.route("/changepassword/<name>")
-def changepassword(name):
-    print(name)
-    return render_template("passwordchange.html",name=name)
-@app.route("/passwordvalidate",methods=["POST"])
-def validatepassword():
-    password=request.form["pass"]
-    username=request.form["name"]
-    print(password)
-    print(username)
-    try:
-        con = ibm_db.connect(
-            "DATABASE=bludb;HOSTNAME=21fecfd8-47b7-4937-840d-d791d0218660.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=31864;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=fzn32689;PWD=bPKXp7YkTR3uKK3a",
-            '', '')
-        try:
-            qry = f"SELECT  * FROM FZN32689.REGISTRATION"
-            stmt = ibm_db.exec_immediate(con, qry)
-            result = ibm_db.fetch_both(stmt)
-            while result!=False:
-                if(result["USERNAME"]==username and result["PASSWORD"]==password):
-                    otp[result["USERNAME"]]=TwoStepAuthenticator.generateOTP()
-                    TwoStepAuthenticator.send_otp(result["MAILID"],otp[result["USERNAME"]])
-                    return ""
-                else:
-                    result = ibm_db.fetch_both(stmt)
-            return "incorrect password"
-
-        except:
-            return "incorrect password"
-    except:
-        return "something went wrong"
-@app.route("/verifyotp",methods=["POST"])
-def verifyotp():
-    print("hii fro verifier of otp")
-    mail=request.form["mail"]
-    ot=request.form["otp"]
-    print(mail)
-    print(ot)
-    if otp[mail]== ot:
-        print("matched")
-        return "otp matched"
-    print("mismatch")
-    return "otp mismatch"
-@app.route("/psck",methods=["POST"])
-def passwordchecker():
-    passwd = request.form["fname"]
-    reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
-
-    # compiling regex
-    pat = re.compile(reg)
-
-    # searching regex
-    mat = re.search(pat, passwd)
-
-    # validating conditions
-    if mat:
-        return ""
-    else:
-        return "password should contain 6 to 20 characters,one special symbol,at least one uppercase and one lowercase character, at least one number"
-@app.route("/passwordchange/<name>",methods=["POST"])
-def changed(name):
-    newpas=request.form["pass"]
-    print(newpas)
-
-    try:
-        con = ibm_db.connect(
-            "DATABASE=bludb;HOSTNAME=21fecfd8-47b7-4937-840d-d791d0218660.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=31864;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=fzn32689;PWD=bPKXp7YkTR3uKK3a",
-            '', '')
-        qry1 = f"SELECT  * FROM FZN32689.REGISTRATION"
-        stmt = ibm_db.exec_immediate(con, qry1)
-        qry = ""
-        result = ibm_db.fetch_both(stmt)
-        username=""
-        mailid=""
-        phno=""
-        subuser=""
-        while result != False:
-            if result["USERNAME"]==name:
-                username=result['USERNAME']
-                mailid=result['MAILID']
-                phno=result['PHNO']
-                subuser=result['SUBUSER' ]
-                qry=f"UPDATE FZN32689.REGISTRATION SET  'USERNAME' = '{username}',  'MAILID' = '{mailid}',  'PHNO' = '{phno}', 'PASSWORD' = '{newpas}',  'SUBUSER' = '{subuser}' WHERE 'USERNAME' = '{name}';"
-
-                break
-            else:
-                result=ibm_db.fetch_both(stmt)
-        stmt = ibm_db.exec_immediate(con, qry)
-    except Exception as e:
-        print(e)
-        return "Something went wrong"
-    return redirect("http://127.0.0.1:5002/profile/"+name)
 if __name__=="__main__":
-    app.run(port=5002,debug=True)
+    app.run(port=5012,debug=True)
 
 

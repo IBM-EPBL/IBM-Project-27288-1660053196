@@ -1,0 +1,12 @@
+<div>
+    <h4>Supplier Details</h4><br><br>
+    <form action={{'/addsupplier/%s'%name}} method="post">
+        <input name="sname" type="text" placeholder="Supplier Name" class="form-control"><br><br>
+        <input name="sloc" type="text" placeholder="Supplied From" class="form-control"><br><br>
+        <input name="qty" type="number" placeholder="Supplied No Of Products" class="form-control"><br><br>
+        <select name="hub" id="hublist" class="form-select">
+            <option><p>NONE</p></option>
+        </select><br><br>
+        <input type="submit" class= "btn btn-primary">
+    </form>
+</div>
