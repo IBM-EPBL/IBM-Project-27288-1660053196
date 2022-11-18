@@ -63,14 +63,16 @@
      
     const xhttp = new XMLHttpRequest();
       xhttp.onload = function() {
+      
           var data=this.responseText;
+          
           var obj=document.getElementById("hublist");
           var pr=JSON.parse(data);
-         var ls=pr["listofhubs"]
-          for(let x in ls){
+         
+          for(let x in pr){
             var opt=document.createElement("option");
-            opt.setAttribute("value",ls[x]["HubName"]);
-            const optionText = document.createTextNode(ls[x]["HubName"]);
+            opt.setAttribute("value",pr[x]["HubName"]);
+            const optionText = document.createTextNode(pr[x]["HubName"]);
             opt.appendChild(optionText);
             obj.appendChild(opt);
           }

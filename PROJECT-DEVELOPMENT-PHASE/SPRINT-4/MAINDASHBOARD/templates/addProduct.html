@@ -1,0 +1,17 @@
+<div>
+    <h4>Product Details</h4><br><br>
+
+    
+    <form action={{'/addproduct/%s'%name}} method="post">
+        <input name="pname" type="text" placeholder="Product Name" class="form-control"><br><br>
+        <input name="sname" type="text" placeholder="Supplier Name" class="form-control"><br><br>
+        <input name="price" type="text" placeholder="Product price" class="form-control"><br><br>
+        <input name="sprice" type="text" placeholder="Selling  price" class="form-control"><br><br>
+        <input name="qty" type="text" placeholder="supplied quantity" class="form-control"><br><br>
+        <input name="date" type="date" placeholder="Date of supplied" class="form-control"><br><br>
+        <select  id="hublist" class="form-select"  name="hub" >
+            <option><p>NONE</p></option>
+        </select><br><br>
+        <input type="submit" class= "btn btn-primary">
+    </form>
+</div>
