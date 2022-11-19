@@ -1,11 +1,39 @@
 import sendgrid
-from sendgrid.helpers.mail import *
-import json
-import urllib.request
+from python_http_client.exceptions import HTTPError
+import apikey
 
-file=urllib.request.urlopen("https://jasper.s3.jp-tok.cloud-object-storage.appdomain.cloud/sample.json")
 
-data=json.load(file)
-print(data["bhawin"])
+API_KEY=apikey.api_key
+
+sg=sendgrid.SendGridAPIClient(API_KEY)
+data = {
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": "bhawinjasperofficial@gmail.com"
+        }
+      ],
+      "subject": "Sending with SendGrid is Fun"
+    }
+  ],
+  "from": {
+    "email": "bhawinjasperbj@gmail.com"
+  },
+  "content": [
+    {
+      "type": "text/plain",
+      "value": "and easy to do anywhere, even with Python"
+    }
+  ]
+}
+try:
+ response = sg.client.mail.send.post(request_body=data)
+ print(response.status_code)
+ print(response.body)
+ print(response.headers)
+except HTTPError as e:
+   print(e.to_dict)
+
 
 

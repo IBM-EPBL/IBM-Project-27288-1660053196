@@ -2,6 +2,9 @@ import ibm_boto3
 from ibm_botocore.client import Config, ClientError
 import PIL.Image as Image
 import io
+import json
+import os
+import re
 
 
 COS_ENDPOINT="https://s3.tok.ap.cloud-object-storage.appdomain.cloud"
@@ -35,6 +38,7 @@ def create_bucket(bucket_name):
         print("Bucket: {0} created!".format(bucket_name))
     except ClientError as be:
         print("CLIENT ERROR: {0}\n".format(be))
+        return "CLIENT ERROR: {0}\n".format(be)
     except Exception as e:
         print("Unable to create bucket: {0}".format(e))
 
@@ -75,8 +79,7 @@ def get_item(bucket_name, item_name):
         file = cos.Object(bucket_name, item_name).get()
 
         by=file["Body"].read()
-        img=Image.open(io.BytesIO(by))
-        img.save("madeit.png")
+        return by
 
 
     except ClientError as be:
@@ -84,4 +87,16 @@ def get_item(bucket_name, item_name):
     except Exception as e:
         print("Unable to retrieve file contents: {0}".format(e))
 
+def delete_bucket(bucket_name):
+    print("Deleting bucket: {0}".format(bucket_name))
+    try:
+        cos.Bucket(bucket_name).delete()
+        print("Bucket: {0} deleted!".format(bucket_name))
+    except ClientError as be:
+        print("CLIENT ERROR: {0}\n".format(be))
+    except Exception as e:
+        print("Unable to delete bucket: {0}".format(e))
+
+
+delete_bucket("bhawin")
 
