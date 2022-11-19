@@ -26,11 +26,11 @@ def validate():
          while result!=False:
             if request.form.__contains__("sub"):
                 if result["USERNAME"] == usernm and result["PASSWORD"] == password and result["SUBUSER"] == 1:
-                    return "under development"
+                    return redirect("http://127.0.0.1:5012/dashboard/"+usernm)
                 else:
                     result = ibm_db.fetch_both(stmt)
             else:
-             if result["USERNAME"]==usernm and  result["PASSWORD"]==password:
+             if result["USERNAME"]==usernm and  result["PASSWORD"]==password and result["SUBUSER"] == 0:
                 return redirect("http://127.0.0.1:5002/dashboard/"+usernm)
              else:
                  result=ibm_db.fetch_both(stmt)
@@ -47,6 +47,7 @@ def validate():
 @app.route("/uservalidate",methods=["POST"])
 def validateusername():
     usr=request.form["fname"]
+    print(usr )
     try:
         con = ibm_db.connect(
             "DATABASE=bludb;HOSTNAME=21fecfd8-47b7-4937-840d-d791d0218660.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=31864;SECURITY=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=fzn32689;PWD=bPKXp7YkTR3uKK3a",
@@ -101,6 +102,7 @@ def verifyotp():
     print(mail)
     print(ot)
     if otp[mail]== ot:
+        print(ot)
         print("matched")
         return "otp matched"
     print("mismatch")

@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-     var ur=""
+     var ur="";
        function checker1(value) {
 
       const xhttp = new XMLHttpRequest();
@@ -28,6 +28,8 @@
            var x = document.createElement("INPUT");
           var y=document.createElement("br")
           var z=document.createElement("p")
+          const node = document.createTextNode(".");
+           z.appendChild(node);
             z.setAttribute("id","otpp") 
             x.setAttribute("type", "password");
             x.setAttribute("placeholder","enter 4 digit otp")
@@ -62,24 +64,35 @@
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("pass="+value+"&name="+ur);
      }
-     var ps=true;
+
      function ok(){
+
         if( document.getElementById("usr").innerHTML!=""){
-          ps=false
+
+          document.getElementById("usr").focus();
+
+          return false;
         }
         if( document.getElementById("psw").innerHTML!=""){
-          ps=false
+
+        document.getElementById("psw").focus();
+
+           return false;
         }
         if( document.getElementById("otpp").innerHTML!="otp matched"){
-          ps=false
+
+        document.getElementById("otpp").focus();
+
+           return false;
         }
-        return ps;
+
+        return true;
      }
   </script>
 <body>
 <div class="container mt-3" >
     <h3>LOGIN</h3>
-<form action="/validate" method="post" onsubmit="return ok()">
+<form  onsubmit="return ok()" action="/validate" method="post" >
     <input  id="user" class="form-control"  type="text" placeholder="username" onfocusout="checker1(this.value)" name="usernm"required ><p id="usr" style="color:red">.</p><br><br>
     <div id="mail">
       <input  class="form-control" type="password" placeholder="Enter your password" onfocusout="checker2(this.value)" name="pass" required><p id="psw" style="color:red">.</p><br><br>

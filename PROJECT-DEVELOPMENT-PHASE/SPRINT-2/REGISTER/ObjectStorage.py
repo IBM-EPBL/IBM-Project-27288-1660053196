@@ -34,7 +34,7 @@ def create_bucket(bucket_name):
         cos.Bucket(bucket_name).create()
         print("Bucket: {0} created!".format(bucket_name))
     except ClientError as be:
-        print("CLIENT ERROR: {0}\n".format(be))
+      return "CLIENT ERROR: {0}\n".format(be)
     except Exception as e:
         print("Unable to create bucket: {0}".format(e))
 
@@ -75,6 +75,7 @@ def get_item(bucket_name, item_name):
         file = cos.Object(bucket_name, item_name).get()
 
         by=file["Body"].read()
+        return  by
 
 
 
@@ -82,5 +83,18 @@ def get_item(bucket_name, item_name):
         print("CLIENT ERROR: {0}\n".format(be))
     except Exception as e:
         print("Unable to retrieve file contents: {0}".format(e))
+
+
+
+def delete_bucket(bucket_name):
+    print("Deleting bucket: {0}".format(bucket_name))
+    try:
+        cos.Bucket(bucket_name).delete()
+        print("Bucket: {0} deleted!".format(bucket_name))
+    except ClientError as be:
+        print("CLIENT ERROR: {0}\n".format(be))
+    except Exception as e:
+        print("Unable to delete bucket: {0}".format(e))
+
 
 

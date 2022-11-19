@@ -7,15 +7,35 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+<!-- you need to include the shieldui css and js assets in order for the charts to work -->
+<link rel="stylesheet" type="text/css" href="https://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+<script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
    var points = JSON.parse('{{ data|safe }}');
     function my(){
       alert(points["{{'%s'%name}}"]);
     }
-
+    
 </script>
+<style>
+  #Profit-Growth{
+  
+  width :50%;
+  float :left;
+}
+#Sales-Growth{
+ 
+  width:50%;
+  float :right;
+}
+</style>
+   
+     
+  
 </head>
-<body  onload="my()">
+<body  >
 <div id="menubar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;" >
          <div class="container-fluid">
@@ -33,8 +53,104 @@
     </nav>
 
 </div>
-<div id="content">
+<div id ="content">
+  <div id="Profit-Growth">
+  
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValues = [50,60,70,80,90,100,110,120,130,140,150];
+var yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 6, max:16}}],
+    },
+    title: {
+      display: true,
+      text: "Profit growth"
+    }
+  }
+});
+</script><br><br>
+</div>
+<div id="Sales-Growth">
+
+<canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart1", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Sales growth"
+    }
+  }
+});
+</script>
+</div><br><br><br>
+<div id="Customer Base">
+ 
+  
+ <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("myChart2", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Customer Base "
+    }
+  }
+});
+</script>
+</div>
 
 </div>
+
 </body>
 </html>

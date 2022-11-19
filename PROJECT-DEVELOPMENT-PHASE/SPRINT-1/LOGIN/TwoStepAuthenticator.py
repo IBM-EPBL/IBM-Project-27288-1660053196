@@ -49,5 +49,5 @@ def generateOTP():
     # by changing value in range
     for i in range(4):
         OTP += digits[math.floor(random.random() * 10)]
-
+    print(OTP)
     return OTP
