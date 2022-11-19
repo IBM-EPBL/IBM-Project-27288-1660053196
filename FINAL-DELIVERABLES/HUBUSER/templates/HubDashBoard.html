@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HubDashBoard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<style>
+.sidenav  {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  position: relative;
+  height: 100%;
+  width: 15%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+  float: left;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #b7afaf;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+#main{
+  float: right;
+  width: 80%;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+</style>
+<script>
+  var index;
+  function openForm(value) {
+    index=Number(value);
+    document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+function openForm1(value) {
+  index=Number(value);
+  document.getElementById("myForm1").style.display = "block";
+}
+
+function closeForm1() {
+  document.getElementById("myForm1").style.display = "none";
+}
+function changeProductDetails(x){
+  alert(x);
+  if(x =="PRICE DETAILS"){
+    var y=document.getElementById("pdform");
+    var cnt=y.childElementCount;
+     while(cnt>0){
+    
+      y.removeChild(y.firstElementChild);
+      cnt--;
+     }
+    var inp=document.createElement("INPUT");
+    var inp1=document.createElement("INPUT");
+    var inp2=document.createElement("INPUT");
+    var inp3=document.createElement("INPUT");
+    inp.setAttribute("placeholder","Enter the Product Price");
+    inp.setAttribute("type","text");
+    inp.setAttribute("id","ppriceet");
+    inp2.setAttribute("type","date");
+    inp2.setAttribute("id","dateet");
+    inp1.setAttribute("placeholder","Enter the Selling Price");
+    inp1.setAttribute("type","text");
+    inp1.setAttribute("id","spriceet");
+    inp3.setAttribute("placeholder","Enter the quantity");
+    inp3.setAttribute("type","text");
+    inp3.setAttribute("id","qtyet");
+   
+    document.getElementById("pdform").appendChild(inp);
+    document.getElementById("pdform").appendChild(inp1);
+    document.getElementById("pdform").appendChild(inp2); 
+    document.getElementById("pdform").appendChild(inp3);
+  }else if(x == "SALES DETAILS"){
+    
+    var y=document.getElementById("pdform");
+    var cnt=y.childElementCount;
+     while(cnt>0){
+    
+      y.removeChild(y.firstElementChild);
+      cnt--;
+     }
+    var inp=document.createElement("INPUT");
+    var inp2=document.createElement("INPUT");
+    inp.setAttribute("placeholder","Enter the qty");
+    inp.setAttribute("type","text");
+    inp.setAttribute("id",x+"qty");
+    inp2.setAttribute("type","date");
+    inp2.setAttribute("id",x+"date");
+    y.appendChild(inp);
+    y.appendChild(inp2);
+  } else{
+    var y=document.getElementById("pdform");
+    var y=document.getElementById("pdform");
+    var cnt=y.childElementCount;
+     while(cnt>0){
+    
+      y.removeChild(y.firstElementChild);
+      cnt--;
+     }
+    var inp=document.createElement("INPUT");
+    inp.setAttribute("placeholder","Enter the "+x);
+    inp.setAttribute("type","text");
+    inp.setAttribute("id",x);
+    y.appendChild(inp);
+  }
+
+}
+    function changenav(value){
+    const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+          document.getElementById("main").innerHTML=this.responseText;
+          if(value=="Hub's"){
+            getHub();
+          }else{
+            getHub1();
+          }
+       }
+  xhttp.open("POST", "{{'/navforhubentry/%s'%name}}");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("fname="+value);
+  }
+  function removeHub(hubname){
+    alert("Going to Remove "+hubname);
+    const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+          alert(this.responseText);
+          location.reload();
+       }
+  xhttp.open("POST", "{{'/removehub/%s'%name}}");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("hub="+hubname);
+  }
+  function getHub(){
+     
+     const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           var data=this.responseText;
+           alert(data);
+           var obj=document.getElementById("mytable");
+           var pr=JSON.parse(data);
+           alert(pr[0]["HubName"]);
+           for(let x in pr){
+            var row = obj.insertRow(-1);
+             var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+             var a=document.createElement("a");
+             a.setAttribute("href","{{'http://127.0.0.1:5001/subregister/%s/'%(name)}}"+pr[x]["HubName"])
+             if(pr[x]["HubManager"]==""){
+              const optionText = document.createTextNode("ADD COWORKER"); 
+              a.appendChild(optionText);
+             }else{
+              const optionText = document.createTextNode("CHANGE COWORKER");
+              a.appendChild(optionText);
+             }
+             var bt=document.createElement("BUTTON");
+             bt.setAttribute("class","btn btn-primary");
+             bt.setAttribute("value",pr[x]["HubName"])
+             bt.addEventListener("click",function(){
+              removeHub(this.value);
+            });
+            var t = document.createTextNode("Remove");
+            
+             bt.appendChild(t);
+            
+             
+             
+             const optionText1 = document.createTextNode(pr[x]["HubName"]);
+             const optionText2 = document.createTextNode(pr[x]["HubLocation"]);
+             const optionText3 = document.createTextNode(pr[x]["HubManager"]);
+             const optionText4 = document.createTextNode(x);
+             cell1.appendChild(optionText4); 
+             cell2.appendChild(optionText1);
+             cell3.appendChild(optionText2);
+             cell4.appendChild(optionText3);
+             cell5.appendChild(a);
+             cell6.appendChild(bt);
+
+           }
+ 
+        }
+   xhttp.open("POST", "{{'/gethublist/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send();
+   }
+   function getHub1(){
+     
+     const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           var data=this.responseText;
+           alert(data);
+           var obj=document.getElementById("hublist");
+           var pr=JSON.parse(data);
+         
+           for(let x in pr){
+             var opt=document.createElement("option");
+             opt.setAttribute("value",pr[x]["HubName"]);
+             const optionText = document.createTextNode(pr[x]["HubName"]);
+             opt.appendChild(optionText);
+             obj.appendChild(opt);
+           }
+ 
+        }
+   xhttp.open("POST", "{{'/gethublist/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send();
+   }
+   function removeSupplier(suppliername){
+     alert("removing "+suppliername);
+     var hname=document.getElementById("hublist").value;
+     
+     const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+          alert(this.responseText);
+          location.reload();
+       }
+  xhttp.open("POST", "{{'/removesupplier/%s'%name}}");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("sname="+suppliername+"&hname="+hname);
+   }
+   function supplierdetails(value){
+    const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+         var data=this.responseText;
+           var obj=document.getElementById("mytable");
+           var pr=JSON.parse(data);
+           for(let x in pr){
+            var row = obj.insertRow(-1);
+             var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5)
+             var bt=document.createElement("BUTTON");
+             bt.setAttribute("class","btn btn-primary");
+             bt.setAttribute("value",pr[x]["suppliername"]);
+             
+             var t = document.createTextNode("Remove");
+            bt.addEventListener("click",function(){
+              removeSupplier(this.value)}
+              );
+             bt.appendChild(t);
+             var bt1=document.createElement("BUTTON");
+             bt1.setAttribute("class","btn btn-primary");
+             bt1.setAttribute("value",x);
+             var t1 = document.createTextNode("Edit");
+            
+             bt1.appendChild(t1);
+             
+             bt1.addEventListener("click", function(){
+              openForm(this.value);
+             });
+             const optionText1 = document.createTextNode(pr[x]["suppliername"]);
+             const optionText2 = document.createTextNode(pr[x]["supplierlocation"]);
+             const optionText3 = document.createTextNode(pr[x]["suppliedproducts"]);
+             const optionText4 = document.createTextNode(x);
+             cell1.appendChild(optionText4); 
+             cell2.appendChild(optionText1);
+             cell3.appendChild(optionText2);
+             cell4.appendChild(optionText3);
+             cell5.appendChild(bt);
+             cell6.appendChild(bt1)
+
+           }
+       }
+  xhttp.open("POST", "{{'/supplierdetails/%s'%name}}");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("fname="+value);
+   }
+   function removeproductdetais(prname){
+    window.confirm("Are you sure to delete");
+     var prdname=prname;
+     var urname="{{'%s'%name}}";
+     var hubname=document.getElementById("hublist").value;
+      
+     const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "/removeproductdetails");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+prname+"&urname="+urname+"&hubname="+hubname);
+    
+   }
+   function productdetails(value){
+    const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+          var data=this.responseText;
+          alert(data);
+          
+          var obj=document.getElementById("mytable");
+           var pr=JSON.parse(data);
+           for(let x in pr){
+            var row = obj.insertRow(-1);
+             var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            var cell7 = row.insertCell(6);
+            var cell8 = row.insertCell(7);
+            var cell9 = row.insertCell(8);
+            var cell10 = row.insertCell(9);
+            var cell11 = row.insertCell(10);
+             var bt=document.createElement("BUTTON");
+             bt.setAttribute("class","btn btn-primary");
+             bt.setAttribute("value",pr[x]["productname"])
+             bt.addEventListener("click",function(){
+                removeproductdetais(this.value);
+             });
+           
+            var t = document.createTextNode("Remove");
+            
+             bt.appendChild(t);
+             var bt1=document.createElement("BUTTON");
+             bt1.setAttribute("class","btn btn-primary");
+             
+             var t1 = document.createTextNode("Edit");
+             bt1.setAttribute("value",x)
+             bt1.appendChild(t1);
+             bt1.addEventListener("click", function(){
+              openForm1(this.value);
+             });
+             const optionText1 = document.createTextNode(x);
+             const optionText2 = document.createTextNode(pr[x]["productname"]);
+             const optionText3 = document.createTextNode(pr[x]["suppliername"]);
+             cell1.appendChild(optionText1);
+             cell2.appendChild(optionText2);
+             cell3.appendChild(optionText3);
+             cell10.appendChild(bt);
+             var prprice="";
+             var selprice="";
+             var datec="";
+             var qty="";
+             var mnt=0;
+             var yr=0;
+             var date=0;
+             var saledqty="";
+             var saleddate="";
+             for(let y in pr[x]["pricedetails"]){
+                  
+                  var myar=pr[x]["pricedetails"][y]["date"].split("-");
+                  
+                  if(yr<=myar[0]){
+                     yr=myar[0];
+                    if (mnt<=myar[1]){
+                      mnt=myar[1];
+                      if (date<myar[2]){
+                        date=myar[2];
+                        prprice=pr[x]["pricedetails"][y]["productprice"];
+                        selprice=pr[x]["pricedetails"][y]["sellingprice"];
+                        datec=pr[x]["pricedetails"][y]["date"]
+                        qty=pr[x]["pricedetails"][y]["qty"];
+                      }
+                    }
+                  }
+             }
+             const optionText4 = document.createTextNode(prprice);
+             const optionText5 = document.createTextNode(selprice);
+             const optionText6 = document.createTextNode(datec);
+             const optionText7 = document.createTextNode(qty);
+             const optionText10 = document.createTextNode(saledqty);
+             const optionText11 = document.createTextNode(saleddate);
+             cell4.appendChild(optionText4);
+             cell5.appendChild(optionText5);
+             cell6.appendChild(optionText6);
+             cell7.appendChild(optionText7);
+             cell11.appendChild(bt1);
+             cell8.appendChild(optionText10);
+             cell9.appendChild(optionText11);
+
+
+           }
+       }
+  xhttp.open("POST", "{{'/productdetails/%s'%name}}");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("fname="+value);
+   }
+   function changeSd(field){
+    alert(field);
+      if(field=="SUPPLIER NAME"){
+
+        var pname=document.getElementById("vl").value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname);
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/changesdname/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname);
+    
+      } 
+      else if(field=="SUPPLIER LOCATION"){
+        var pname=document.getElementById("vl").value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname);
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/changesdlocation/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname);
+    
+      }
+      else if(field=="NO OF PRODUCTS"){
+        var pname=document.getElementById("vl").value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname);
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/changesdqty/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname);
+    
+      }
+     
+        
+      }
+      function changePd(field){
+    alert(field);
+      if(field=="PRODUCT NAME"){
+       
+        var pname=document.getElementById(field).value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/changepname/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname);
+    
+      } 
+      else if(field=="SUPPLIER NAME"){
+        var pname=document.getElementById(field).value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname)
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/changesname/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname);
+    
+      }
+      else if(field=="PRICE DETAILS"){
+        var price=document.getElementById("ppriceet").value;
+        var sprice=document.getElementById("spriceet").value;
+        var date=document.getElementById("dateet").value;
+        var qty=document.getElementById("qtyet").value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        var pname=obj.item(1).innerHTML;
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/addpricedetails/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname+"&price="+price+"&sprice="+sprice+"&date="+date+"&qty="+qty);
+    
+      }
+    else {
+        var qty=document.getElementById(field+"qty").value;
+        var date=document.getElementById(field+"date").value;
+        var hubname=document.getElementById("hublist").value;
+        var table=document.getElementById("mytable");
+        var obj= table.rows.item(index+1).cells;
+        var currentproduct=obj.item(1).innerHTML;
+        var pname=obj.item(2).innerHTML;
+        const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           alert(this.responseText);
+           location.reload();
+ 
+        }
+   xhttp.open("POST", "{{'/addsalesdetails/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("prdname="+pname+"&olpname="+currentproduct+"&hubname="+hubname+"&qty="+qty+"&date="+date);
+    
+      }
+    }
+        
+   
+</script>
+</head>
+<body>
+<div id="menubar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;" >
+        <div class="navbar-brand" onclick="history.back()">
+      <img src="https://static.thenounproject.com/png/251451-200.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+    </div>
+         <div class="container-fluid">
+    <a class="navbar-brand" href="{{'/profile/%s'%name}}">
+      <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top">
+      {{name}}
+    </a>
+  </div>
+        <a class="navbar-brand" href="{{'/dashboard/%s'%name}}">Home</a>
+        <a class="navbar-brand" href="{{'/Analysis/%s'%name}}">Analysis</a>
+        <a class="navbar-brand" href="{{'/Ranking/%s'%name}}">Ranking</a>
+        <a class="navbar-brand" href="{{'/HubEntry/%s'%name}}">Hub Entry</a>
+
+
+    </nav>
+
+</div>
+<div class="sidenav">
+  <a href="#" onclick="changenav(this.textContent)">Hub's</a>
+  <a href="#" onclick="changenav(this.textContent)">ProductDetails</a>
+  <a href="#" onclick="changenav(this.textContent)">SupplierDetails</a>
+</div>
+<div id="main">
+
+</div>
+<div class="form-popup" id="myForm">
+  <form  class="form-container" onsubmit="prevent(this)">
+   
+
+    <label for="email"><b>Select Coloumn</b></label><br><br>
+    <select name="email" class="form-select" id="opt1" required>
+      <option value="" >None</option>
+       <option>SUPPLIER NAME</option>
+       <option>SUPPLIER LOCATION</option>
+       <option>NO OF PRODUCTS</option>
+    </select><br><br>
+
+    <label for="psw"><b>VALUE</b></label>
+    <input type="text" placeholder="Enter the value" name="psw" id="vl" required>
+
+    <button type="submit" class="btn"  onclick="changeSd(document.getElementById('opt1').value)">Submit</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+<script>
+  function prevent(e){
+     e.preventDefault();
+  }
+</script>
+<div class="form-popup" id="myForm1">
+  <form  class="form-container" onsubmit="prevent(this)" >
+   
+
+    <label for="email"><b>Select Coloumn</b></label><br><br>
+    <select name="email" id="opt" class="form-select" onchange="changeProductDetails(this.value)" required>
+      <option value="" >None</option>
+       <option value="PRODUCT NAME" >PRODUCT NAME</option>
+       <option value="SUPPLIER NAME">SUPPLIER NAME</option>
+       <option value="PRICE DETAILS">PRICE DETAILS</option>
+       <option value="SALES DETAILS">SALES DETAILS</option>
+    </select><br><br>
+
+    <div id="pdform">
+    <input id="first" type="password" placeholder="Enter the value" name="psw" required>
+    </div><br><br>
+
+    <button type="submit" class="btn" onclick="changePd(document.getElementById('opt').value)">Submit</button>
+    <button type="button" class="btn cancel" onclick="closeForm1()">Close</button>
+  </form>
+</div>
+</body>
+</html>

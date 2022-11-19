@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{name}}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<style>
+#dp{
+ border-radius:8 px;
+}
+#profile{
+  border-style: solid;
+  border-color: rgb(68, 183, 215);
+  border-width: 1px;
+  width :50%;
+  float :left;
+}
+#settings{
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(68, 183, 215);
+  width:50%;
+  float :right;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+<script>
+  function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+function openForm1() {
+  document.getElementById("myForm1").style.display = "block";
+}
+
+function closeForm1() {
+  document.getElementById("myForm1").style.display = "none";
+}
+</script>
+</head>
+<body>
+<div id="menubar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;" >
+         <div class="container-fluid">
+    <div class="navbar-brand" onclick="history.back()">
+      <img src="https://static.thenounproject.com/png/251451-200.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+    </div>
+  </div>
+        <a class="navbar-brand" href="{{'/dashboard/%s'%name}}">Home</a>
+        <a class="navbar-brand" href="{{'/Analysis/%s'%name}}">Analysis</a>
+        <a class="navbar-brand" href="{{'/Ranking/%s'%name}}">Ranking</a>
+        <a class="navbar-brand" href="{{'/HubEntry/%s'%name}}">Hub Entry</a>
+        <a class="navbar-brand" href="{{'/HubDashBoard/%s'%name}}">Hub DashBoard</a>
+
+    </nav>
+
+</div>
+<div>
+<div class="container" id="profile">
+    <img id="dp" src="MAINDASHBOARD\anojprofilepic.png" alt="{{'%s'%name}}" style="width:200px"><hr><br>
+    <form action = {{'/changeprofile/%s'%name}} method = "post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type = "submit" value="Upload" class="btn btn-primary">
+    </form>  <hr><br>
+    <span > {{data["mailId"]}} &emsp;   <button class="btn btn-primary" onclick="openForm()">change</button></span><hr><br>
+    <span > {{data["phNo"]}} &emsp;   <button class="btn btn-primary" onclick="openForm1()">change</button></span>
+      <hr><br>   <a  href=" {{'/changepassword/%s'%name}}">CHANGE PASSWORD</a>
+      <div class="form-popup" id="myForm">
+        <form action="/action_page.php" class="form-container">
+         
+      
+          <label for="email"><b>Email Id</b></label><br><br>
+          <input name="email"  type="email" placeholder="Enter new mail id" class="form-control" ><br>
+            
+      
+          <label for="psw"><b>VALUE</b></label>
+          <input type="text" placeholder="Enter the otp" name="psw" required>
+      
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+      <div class="form-popup" id="myForm1">
+        <form action="/action_page.php" class="form-container">
+          <label for="psw"><b>PH NO :</b></label><br>
+          <input type="tel" placeholder="Enter the number" name="psw" class="form-control" required><br><br>
+      
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="closeForm1()">Close</button>
+        </form>
+      </div><br><br><br>
+      <button class="btn btn-danger" ><a href="http://127.0.0.1:5000">Log Out</a></button>
+      
+      
+</div>
+<script>
+  function settings(){
+     var ck1=document.getElementById("Hday");
+     var ck2=document.getElementById("Hweek");
+     var ck3=document.getElementById("Hmonth");
+     var ck4=document.getElementById("Pday");
+     var ck5=document.getElementById("Pweek");
+     var ck6=document.getElementById("Pmonth");
+     var hr="";
+     var pr="";
+     var kl=document.getElementById("kilo").value;
+     var cnt=document.getElementById("count").value;
+     if(ck1.checked == true){
+        hr=ck1.value;
+     }
+     else if(ck2.checked == true){
+      hr=ck2.value;
+     }else if(ck3.checked == true){
+      hr=ck3.value;
+     }
+     if(ck4.checked == true){
+        pr=ck4.value;
+     }
+     else if(ck5.checked == true){
+      pr=ck5.value;
+     }else if(ck6.checked == true){
+      pr=ck6.value;
+     }
+     alert("going to make changes");
+     const xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+          alert(this.responseText);
+          
+         
+       }
+  xhttp.open("POST", "{{'/settings/%s'%name}}");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("hr="+hr+"&pr="+pr+"&kl="+kl+"&cnt="+cnt);
+  }
+</script>
+<div  class ="container" id="settings">
+  <h3>Hub Ranking</h3> 
+  <input type="checkbox" value="day"  class="form-check-input" id="Hday"> Day</input><br><br>
+  <input type="checkbox" value="week"  class="form-check-input" id="Hweek"> Week</input><br><br>
+  <input type="checkbox" value="month"  class="form-check-input" id="Hmonth"> Month</input><br><hr>
+  <h3>Product Ranking</h3> 
+  <input type="checkbox" value="day"  class="form-check-input" id="Pday"> Day</input><br><br>
+  <input type="checkbox" value="week"  class="form-check-input" id="Pweek"> Week</input><br><br>
+  <input type="checkbox" value="month"  class="form-check-input"  id="Pmonth"> Month</input><br><hr>
+  
+  <h3>Product Alert</h3> 
+  <input type="text"  class="form-control" placeholder="For Kilogram " id="kilo"></input><br><br>
+  <input type="number"  class="form-control"placeholder="for countable products" id="count"></input><br><br>
+
+  <button class="btn btn-primary" class="form-control" onclick="settings()">Save Changes</button>
+</div>
+</div>
+
+
+</body>
+</html>
