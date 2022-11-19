@@ -1,9 +1,9 @@
 import sendgrid
 from python_http_client.exceptions import HTTPError
 import math,random
-
+import apikey
 def send_otp(mailId,otp):
-    API_KEY = "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"
+    API_KEY = apikey.api_key
 
     sg = sendgrid.SendGridAPIClient(API_KEY)
     data = {
