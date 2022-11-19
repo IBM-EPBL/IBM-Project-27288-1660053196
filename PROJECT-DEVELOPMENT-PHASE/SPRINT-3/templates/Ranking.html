@@ -8,7 +8,64 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<script>
+  function getHub1(){
+     getHub();
+     const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           var data=this.responseText;
+           alert(data);
+           var obj=document.getElementById("hublist");
+           var pr=JSON.parse(data);
+         
+           for(let x in pr){
+             var opt=document.createElement("option");
+             opt.setAttribute("value",pr[x]["HubName"]);
+             const optionText = document.createTextNode(pr[x]["HubName"]);
+             opt.appendChild(optionText);
+             obj.appendChild(opt);
+           }
+ 
+        }
+   xhttp.open("POST", "{{'/gethublist/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send();
+   }
+   function getHub(){
+     
+     const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           var data=this.responseText;
+           alert(data);
+           var obj=document.getElementById("mytable");
+           var pr=JSON.parse(data);
+           alert(pr[0]["HubName"]);
+           for(let x in pr){
+            var row = obj.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+           
+            var rank=1;
+             const optionText1 = document.createTextNode(pr[x]["HubName"]);
+             const optionText2 = document.createTextNode(pr[x]["HubLocation"]);
+             const optionText3 = document.createTextNode(x);
+             const optionText4 = document.createTextNode(rank);
+              cell1.appendChild(optionText3);
+              cell2.appendChild(optionText1);
+              cell3.appendChild(optionText2);
+              cell4.appendChild(optionText4);
+              
+           }
+ 
+        }
+   xhttp.open("POST", "{{'/gethublist/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send();
+   }
+</script>
+<body onload="getHub1()">
 <div id="menubar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;" >
         <div class="navbar-brand" onclick="history.back()">
@@ -30,7 +87,21 @@
 <select  id="hublist" class="form-select"  name="hub" onchange="productdetails(this.value)" >
             <option><p>Select the hub to see the productdetails</p></option>
 </select><br><br>
-
+<table class="table" id="mytable">
+  <thead>
+    <tr>
+      <th scope="col">S.no</th>
+      <th scope="col">HUB NAME</th>
+      <th scope="col">HUB LOCATION</th>
+      <th scope="col">RANK</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+  
+  </tbody>
+</table>
 </div>
 </body>
 </html>

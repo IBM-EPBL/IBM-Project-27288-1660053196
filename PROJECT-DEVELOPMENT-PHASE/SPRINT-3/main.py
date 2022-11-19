@@ -161,6 +161,8 @@ def hublist(name):
         by=by.decode("UTF -8")
         by=json.loads(by)
         for y in by["listofhubs"]:
+            print(x)
+            print(y)
             if y["HubName"] == x["hubname"]:
                 rtdata.append(y)
     return json.dumps(rtdata)
@@ -637,17 +639,18 @@ def addpricedetails(name):
             print(b)
             b = b.decode("UTF -8")
             b = json.loads(b)
+            ne=x
             for x in b["listofhubs"]:
                 if x["HubName"] == hname:
                     for y in x["ProductDetails"]:
                         if y["productname"] == olpname:
                             y["pricedetails"].append(pricedetails)
                             print(pricedetails)
-                            file = open(x["ownername"] + "hub", "w")
-                            file.write(json.dumps(data))
+                            file = open(ne["ownername"] + "hub", "w")
+                            file.write(json.dumps(b))
                             file.close()
-                            ObjectStorage.multi_part_upload(x["ownername"],x["ownername"] + "hub", os.path.abspath(x["ownername"] + "hub"))
-                            os.remove(os.path.abspath(x["ownername"]+ "hub"))
+                            ObjectStorage.multi_part_upload(ne["ownername"],ne["ownername"] + "hub", os.path.abspath(ne["ownername"] + "hub"))
+                            os.remove(os.path.abspath(ne["ownername"]+ "hub"))
                             break
             break
     return "Added successfully"
@@ -667,9 +670,16 @@ def addsalesdetails(name):
     sales["saledqty"] = qty
     sales["saleddate"] = date
     for x in data["listofhubs"]:
-        if x["HubName"] == hname:
-            for y in x["ProductDetails"]:
-                if y["productname"] == olpname:
+        if x["hubname"] == hname:
+            b = ObjectStorage.get_item(x["ownername"], x["ownername"] + "hub")
+            print(b)
+            b = b.decode("UTF -8")
+            b = json.loads(b)
+            ne = x
+            for x in b["listofhubs"]:
+                if x["HubName"] == hname:
+                 for y in x["ProductDetails"]:
+                  if y["productname"] == olpname:
                     if y["productname"] == olpname and y["suppliername"] == sname:
                         dy = 0;
                         mnt = 0;
@@ -707,12 +717,15 @@ def addsalesdetails(name):
                                 numbers1 += i
                             else:
                                 text1 += i
+
+                        if int(numbers)<int(numbers1):
+                            return "Invalid input"
                         zin["qty"] = str(abs(int(numbers1) - int(numbers))) + text1
                         newqty = abs(int(numbers1) - int(numbers))
                         by = ObjectStorage.get_item(name, name + "settings")
                         by = by.decode("UTF -8")
                         by = json.loads(by)
-                        num = ""
+                        num = "0"
                         if text != "":
                             for i in by["productalertkl"]:
                                 if (i.isdigit()):
@@ -728,14 +741,22 @@ def addsalesdetails(name):
                             TwoStepAuthenticator.message(by["mailId"], "Low stock ",
                                                          "Losw stock  make an order to meet out the demand product name= " + olpname + "quantity left=" + str(
                                                              newqty) + text1)
+                            by = ObjectStorage.get_item(x["ownername"], x["ownername"] + "profile")
+                            by = by.decode("UTF -8")
+                            by = json.loads(by)
+                            print(by)
+                            TwoStepAuthenticator.message(by["mailId"], "Low stock ",
+                                                         "Losw stock  make an order to meet out the demand product name= " + olpname + "quantity left=" + str(
+                                                             newqty) + text1)
 
                     y["salesdetails"].append(sales)
                     print(pricedetails)
-                    file = open(name + "hub", "w")
-                    file.write(json.dumps(data))
+                    file = open(ne["ownername"] + "hub", "w")
+                    file.write(json.dumps(b))
                     file.close()
-                    ObjectStorage.multi_part_upload(name, name + "hub", os.path.abspath(name + "hub"))
-                    os.remove(os.path.abspath(name + "hub"))
+                    ObjectStorage.multi_part_upload(ne["ownername"], ne["ownername"] + "hub",
+                                                    os.path.abspath(ne["ownername"] + "hub"))
+                    os.remove(os.path.abspath(ne["ownername"] + "hub"))
                     break
             break
     return "Added successfully"
@@ -753,15 +774,22 @@ def changeSdname(name):
     data = data.decode("UTF -8")
     data = json.loads(data)
     for x in data["listofhubs"]:
-        if x["HubName"] == hname:
-            for y in x["SupplierDetails"]:
+     if x["hubname"] == hname:
+      b = ObjectStorage.get_item(x["ownername"], x["ownername"] + "hub")
+      print(b)
+      b = b.decode("UTF -8")
+      b = json.loads(b)
+      for z in b["listofhubs"]:
+        if z["HubName"] == hname:
+            for y in z["SupplierDetails"]:
                 if y["suppliername"] == olpname:
                     y["suppliername"] = pname
-                    file = open(name + "hub", "w")
-                    file.write(json.dumps(data))
+                    file = open(x["ownername"] + "hub", "w")
+                    file.write(json.dumps(b))
                     file.close()
-                    ObjectStorage.multi_part_upload(name, name + "hub", os.path.abspath(name + "hub"))
-                    os.remove(os.path.abspath(name + "hub"))
+                    ObjectStorage.multi_part_upload(x["ownername"], x["ownername"] + "hub",
+                                                    os.path.abspath(x["ownername"] + "hub"))
+                    os.remove(os.path.abspath(x["ownername"] + "hub"))
                     break
             break
     return "changed successfully"
@@ -779,15 +807,22 @@ def changeSdlocation(name):
     data = data.decode("UTF -8")
     data = json.loads(data)
     for x in data["listofhubs"]:
-        if x["HubName"] == hname:
-            for y in x["SupplierDetails"]:
+     if x["hubname"] == hname:
+        b = ObjectStorage.get_item(x["ownername"], x["ownername"] + "hub")
+        print(b)
+        b = b.decode("UTF -8")
+        b = json.loads(b)
+        for z in b["listofhubs"]:
+         if z["HubName"] == hname:
+            for y in z["SupplierDetails"]:
                 if y["suppliername"] == olpname:
                     y["supplierlocation"] = pname
-                    file = open(name + "hub", "w")
-                    file.write(json.dumps(data))
+                    file = open(x["ownername"] + "hub", "w")
+                    file.write(json.dumps(b))
                     file.close()
-                    ObjectStorage.multi_part_upload(name, name + "hub", os.path.abspath(name + "hub"))
-                    os.remove(os.path.abspath(name + "hub"))
+                    ObjectStorage.multi_part_upload(x["ownername"], x["ownername"] + "hub",
+                                                    os.path.abspath(x["ownername"] + "hub"))
+                    os.remove(os.path.abspath(x["ownername"] + "hub"))
                     break
             break
     return "changed successfully"
@@ -805,15 +840,23 @@ def changeSdqty(name):
     data = data.decode("UTF -8")
     data = json.loads(data)
     for x in data["listofhubs"]:
-        if x["HubName"] == hname:
-            for y in x["SupplierDetails"]:
+     for x in data["listofhubs"]:
+        if x["hubname"] == hname:
+            b = ObjectStorage.get_item(x["ownername"], x["ownername"] + "hub")
+            print(b)
+            b = b.decode("UTF -8")
+            b = json.loads(b)
+            for z in b["listofhubs"]:
+             if z["HubName"] == hname:
+              for y in z["SupplierDetails"]:
                 if y["suppliername"] == olpname:
                     y["suppliedproducts"] = pname
-                    file = open(name + "hub", "w")
-                    file.write(json.dumps(data))
+                    file = open(x["ownername"] + "hub", "w")
+                    file.write(json.dumps(b))
                     file.close()
-                    ObjectStorage.multi_part_upload(name, name + "hub", os.path.abspath(name + "hub"))
-                    os.remove(os.path.abspath(name + "hub"))
+                    ObjectStorage.multi_part_upload(x["ownername"], x["ownername"] + "hub",
+                                                    os.path.abspath(x["ownername"] + "hub"))
+                    os.remove(os.path.abspath(x["ownername"] + "hub"))
                     break
             break
     return "changed successfully"
@@ -832,7 +875,7 @@ def settings(name):
     file.close()
     ObjectStorage.multi_part_upload(name,name+"settings",os.path.abspath(name+"settings"))
     os.remove(os.path.abspath(name+"settings"))
-
+    return "Updated"
 
 if __name__ == "__main__":
     app.run(port=5012, debug=True)

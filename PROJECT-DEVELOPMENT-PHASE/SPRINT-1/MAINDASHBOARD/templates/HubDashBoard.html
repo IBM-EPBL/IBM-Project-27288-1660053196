@@ -234,7 +234,7 @@ function changeProductDetails(x){
            var pr=JSON.parse(data);
            var ls=pr["listofhubs"];
            for(let x in ls){
-            var row = obj.insertRow(1);
+            var row = obj.insertRow(-1);
              var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
@@ -321,7 +321,7 @@ function changeProductDetails(x){
            var obj=document.getElementById("mytable");
            var pr=JSON.parse(data);
            for(let x in pr){
-            var row = obj.insertRow(1);
+            var row = obj.insertRow(-1);
              var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
@@ -339,7 +339,7 @@ function changeProductDetails(x){
              bt.appendChild(t);
              var bt1=document.createElement("BUTTON");
              bt1.setAttribute("class","btn btn-primary");
-             bt1.setAttribute("value",x+1);
+             bt1.setAttribute("value",x);
              var t1 = document.createTextNode("Edit");
             
              bt1.appendChild(t1);
@@ -416,7 +416,7 @@ function changeProductDetails(x){
              bt1.setAttribute("class","btn btn-primary");
              
              var t1 = document.createTextNode("Edit");
-             bt1.setAttribute("value",x+1)
+             bt1.setAttribute("value",x)
              bt1.appendChild(t1);
              bt1.addEventListener("click", function(){
               openForm1(this.value);
@@ -482,7 +482,7 @@ function changeProductDetails(x){
         var pname=document.getElementById("vl").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
@@ -499,7 +499,7 @@ function changeProductDetails(x){
         var pname=document.getElementById("vl").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
@@ -516,7 +516,7 @@ function changeProductDetails(x){
         var pname=document.getElementById("vl").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
@@ -538,7 +538,7 @@ function changeProductDetails(x){
         var pname=document.getElementById(field).value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
@@ -555,7 +555,7 @@ function changeProductDetails(x){
         var pname=document.getElementById(field).value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
@@ -575,7 +575,7 @@ function changeProductDetails(x){
         var qty=document.getElementById("qtyet").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         var pname=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
@@ -594,7 +594,7 @@ function changeProductDetails(x){
         var date=document.getElementById(field+"date").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         var pname=obj.item(2).innerHTML;
 

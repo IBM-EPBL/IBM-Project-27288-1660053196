@@ -13,10 +13,11 @@ profile={
     "phNo" :"",
     "settings" : ""
 }
-settings={
+Settings={
     "productranking":"",
     "hubranking":"",
-    "productalert":""
+    "productalertkl":"",
+     "productalertcnt":""
 }
 hub={
 "listofhubs":[]
@@ -55,12 +56,12 @@ def mainregister():
          profile["userName"]=usernm
          profile["mailId"] = mailid
          profile["phNo"] = phno
-         jsn=json.dumps(settings)
+         jsn=json.dumps(Settings)
          file=open(usernm+"settings","w")
          file.write(jsn)
          file.close()
-         ObjectStorage.multi_part_upload(usernm,usernm+"-settings",os.path.abspath(usernm+"-settings"))
-         os.remove(os.path.abspath(usernm+"-settings"))
+         ObjectStorage.multi_part_upload(usernm,usernm+"settings",os.path.abspath(usernm+"settings"))
+         os.remove(os.path.abspath(usernm+"settings"))
          profile["settings"]=usernm+"settings"
          jsn1=json.dumps(profile)
          jsn2=json.dumps(hub)
@@ -142,12 +143,12 @@ def subregister(name,hubname):
                      break
                  break
 
-         jsn = json.dumps(settings)
-         file = open(usernm + "-settings", "w")
+         jsn = json.dumps(Settings)
+         file = open(usernm + "settings", "w")
          file.write(jsn)
          file.close()
-         ObjectStorage.multi_part_upload(usernm, usernm + "-settings", os.path.abspath(usernm + "-settings"))
-         os.remove(os.path.abspath(usernm + "-settings"))
+         ObjectStorage.multi_part_upload(usernm, usernm + "settings", os.path.abspath(usernm + "settings"))
+         os.remove(os.path.abspath(usernm + "settings"))
          fl = open(name + "hub", "w")
          fl.write(json.dumps(data))
          fl.close()

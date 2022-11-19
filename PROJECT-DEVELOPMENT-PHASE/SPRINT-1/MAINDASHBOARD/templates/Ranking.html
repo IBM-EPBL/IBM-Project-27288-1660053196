@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
    function getHub1(){
-     
+     getHub();
      const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            var data=this.responseText;
@@ -21,6 +21,41 @@
              const optionText = document.createTextNode(ls[x]["HubName"]);
              opt.appendChild(optionText);
              obj.appendChild(opt);
+           }
+ 
+        }
+   xhttp.open("POST", "{{'/gethublist/%s'%name}}");
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send();
+   }
+   function getHub(){
+     
+     const xhttp = new XMLHttpRequest();
+       xhttp.onload = function() {
+           var data=this.responseText;
+           var obj=document.getElementById("mytable");
+           var pr=JSON.parse(data);
+           var ls=pr["listofhubs"];
+           alert(data);
+           for(let x in ls){
+            var row = obj.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+          
+            var rank=1;
+           
+             const optionText1 = document.createTextNode(ls[x]["HubName"]);
+             const optionText2 = document.createTextNode(ls[x]["HubLocation"]);
+             const optionText3 = document.createTextNode(x);
+             const optionText4 = document.createTextNode(rank);
+             
+              cell1.appendChild(optionText3);
+              cell2.appendChild(optionText1);
+              cell3.appendChild(optionText2);
+              cell4.appendChild(optionText4);
+             
            }
  
         }

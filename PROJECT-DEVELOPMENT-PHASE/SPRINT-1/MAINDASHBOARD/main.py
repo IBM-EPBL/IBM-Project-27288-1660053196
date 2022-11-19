@@ -538,7 +538,9 @@ def addsalesdetails(name):
                             numbers1 += i
                         else:
                             text1 += i
-                    zin["qty"]=str(abs(int(numbers1)-int(numbers)))+text1
+                    if int(numbers) < int(numbers1):
+                        return "Invalid input"
+                    zin["qty"] = str(abs(int(numbers1) - int(numbers))) + text1
                     newqty=abs(int(numbers1)-int(numbers))
                     by=ObjectStorage.get_item(name,name+"settings")
                     by=by.decode("UTF -8")
@@ -557,8 +559,13 @@ def addsalesdetails(name):
                         by = json.loads(by)
                         print(by)
                         TwoStepAuthenticator.message(by["mailId"],"Low stock ","Losw stock  make an order to meet out the demand product name= "+olpname+"quantity left="+str(newqty)+text1)
-
-
+                        by = ObjectStorage.get_item(x["HubManager"], x["HubManager"] + "profile")
+                        by = by.decode("UTF -8")
+                        by = json.loads(by)
+                        print(by)
+                        TwoStepAuthenticator.message(by["mailId"], "Low stock ",
+                                                     "Losw stock  make an order to meet out the demand product name= " + olpname + "quantity left=" + str(
+                                                         newqty) + text1)
 
                     y["salesdetails"].append(sales)
 

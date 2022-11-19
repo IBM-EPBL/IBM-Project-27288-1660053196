@@ -341,7 +341,7 @@ function changeProductDetails(x){
              bt.appendChild(t);
              var bt1=document.createElement("BUTTON");
              bt1.setAttribute("class","btn btn-primary");
-             bt1.setAttribute("value",x+1);
+             bt1.setAttribute("value",x);
              var t1 = document.createTextNode("Edit");
             
              bt1.appendChild(t1);
@@ -418,7 +418,7 @@ function changeProductDetails(x){
              bt1.setAttribute("class","btn btn-primary");
              
              var t1 = document.createTextNode("Edit");
-             bt1.setAttribute("value",x+1)
+             bt1.setAttribute("value",x)
              bt1.appendChild(t1);
              bt1.addEventListener("click", function(){
               openForm1(this.value);
@@ -481,11 +481,13 @@ function changeProductDetails(x){
    function changeSd(field){
     alert(field);
       if(field=="SUPPLIER NAME"){
+
         var pname=document.getElementById("vl").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname);
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            alert(this.responseText);
@@ -501,8 +503,9 @@ function changeProductDetails(x){
         var pname=document.getElementById("vl").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname);
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            alert(this.responseText);
@@ -518,8 +521,9 @@ function changeProductDetails(x){
         var pname=document.getElementById("vl").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname);
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            alert(this.responseText);
@@ -537,10 +541,11 @@ function changeProductDetails(x){
       function changePd(field){
     alert(field);
       if(field=="PRODUCT NAME"){
+       
         var pname=document.getElementById(field).value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
@@ -557,8 +562,9 @@ function changeProductDetails(x){
         var pname=document.getElementById(field).value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
+        alert(pname+currentproduct+hubname)
         const xhttp = new XMLHttpRequest();
        xhttp.onload = function() {
            alert(this.responseText);
@@ -577,7 +583,7 @@ function changeProductDetails(x){
         var qty=document.getElementById("qtyet").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         var pname=obj.item(1).innerHTML;
         const xhttp = new XMLHttpRequest();
@@ -596,7 +602,7 @@ function changeProductDetails(x){
         var date=document.getElementById(field+"date").value;
         var hubname=document.getElementById("hublist").value;
         var table=document.getElementById("mytable");
-        var obj= table.rows.item(index).cells;
+        var obj= table.rows.item(index+1).cells;
         var currentproduct=obj.item(1).innerHTML;
         var pname=obj.item(2).innerHTML;
         const xhttp = new XMLHttpRequest();

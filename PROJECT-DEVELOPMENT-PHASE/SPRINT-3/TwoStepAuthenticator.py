@@ -51,3 +51,41 @@ def generateOTP():
         OTP += digits[math.floor(random.random() * 10)]
     print(OTP)
     return OTP
+
+
+def message(mailId,subject,message):
+    API_KEY = apikey.api_key
+
+    sg = sendgrid.SendGridAPIClient(API_KEY)
+    data = {
+        "personalizations": [
+            {
+                "to": [
+                    {
+                        "email": mailId
+                    }
+                ],
+                "subject": subject
+            }
+        ],
+        "from": {
+            "email": "bhawinjasperbj@gmail.com"
+        },
+        "content": [
+            {
+                "type": "text/plain",
+                "value": message
+            }
+        ]
+    }
+    try:
+        response = sg.client.mail.send.post(request_body=data)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+        return ""
+    except HTTPError as e:
+        print(e.to_dict)
+        return "INVALID MAILID"
+
+

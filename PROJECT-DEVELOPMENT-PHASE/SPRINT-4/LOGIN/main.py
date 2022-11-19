@@ -102,6 +102,7 @@ def verifyotp():
     print(mail)
     print(ot)
     if otp[mail]== ot:
+        print(ot)
         print("matched")
         return "otp matched"
     print("mismatch")

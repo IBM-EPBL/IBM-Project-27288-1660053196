@@ -52,7 +52,7 @@ def generateOTP():
     print(OTP)
     return OTP
 def message(mailId,subject,message):
-    API_KEY = "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"
+    API_KEY = apikey.api_key
 
     sg = sendgrid.SendGridAPIClient(API_KEY)
     data = {
