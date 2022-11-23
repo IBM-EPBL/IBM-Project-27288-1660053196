@@ -1,7 +1,6 @@
 import ibm_boto3
 from ibm_botocore.client import Config, ClientError
-import PIL.Image as Image
-import io
+
 
 
 COS_ENDPOINT="https://s3.tok.ap.cloud-object-storage.appdomain.cloud"

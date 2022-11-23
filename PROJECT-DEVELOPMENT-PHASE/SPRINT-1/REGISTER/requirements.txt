@@ -1,3 +1,5 @@
 flask
 ibm-db
 ibm_cos_sdk
+gunicorn
+sendgrid
