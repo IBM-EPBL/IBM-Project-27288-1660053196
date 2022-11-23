@@ -1,7 +1,5 @@
 from flask import Flask,render_template,request,redirect
 import json
-import PIL.Image as Image
-import io
 import os
 import ObjectStorage
 import ibm_db
@@ -669,6 +667,6 @@ def settings(name):
 
     return "Updated"
 if __name__=="__main__":
-    app.run(port=5002,debug=True)
+    app.run(port=5002,debug=True,host="0.0.0.0")
 
 
