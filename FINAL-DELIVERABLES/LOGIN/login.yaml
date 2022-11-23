@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ibm-login-test
+
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: ibm-login-test
+  template:
+    metadata:
+      labels:
+        app: ibm-login-test
+
+    spec:
+      containers:
+        - name: ibm-login-test
+          image: ibm-login:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+              protocol: TCP
