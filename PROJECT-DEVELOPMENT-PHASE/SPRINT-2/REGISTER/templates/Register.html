@@ -6,6 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  
 
     <script>
 
@@ -125,24 +126,75 @@
      }
 
 </script>
+<style>
+body{
+  background-image: url("https://jasper.s3.jp-tok.cloud-object-storage.appdomain.cloud/reminder-schedule-checklist-deadline-icon-symbol-planner-concept-pink-background-3d-rendering.jpg");
+ 
+  
+}
+#heading{
+  padding: 10%;
+  width :50%;
+  float :left;
+  font-style: italic;
+}
+
+#register{
+  
+  width:50%;
+  float :right;
+}
+h3{
+  font-style: italic;
+}
+
+</style>
 
 </head>
 <body >
+  <div id="heading" class ="container">
+      <h2>Inventory  management  system</h2><hr><br>
+      <img src="https://jasper.s3.jp-tok.cloud-object-storage.appdomain.cloud/our-company.png" width="100%">
+     
+  </div>
+<div id="register" class ="container">
 <div class="container mt-3" >
-    <h3>REGISTER</h3>
+    <h3>REGISTER</h3><br><br>
 <form action="/mainvalidate" method="post"  onsubmit="return ok()">
-    <input  class="form-control"  type="text" placeholder="username" name="usernm" onfocusout="loadDoc(this.value)" required><p id="vl1" style="color:red">username should contain only lower case letter and numeric values.</p><br><br>
-    <div id="mail">
-    <input  class="form-control"  type="email" placeholder="eneter your maild" name="mail" onfocusout="loadDoc1(this.value)"required><p id="vl2" style="color:red">.</p><br><br>
-    </div>
-    <div id="ph">
-     <input  class="form-control"  type="tel" placeholder="enete your phone number " name="phno" onfocusout="loadDoc2(this.value)"required><p id="vl3" style="color:red">.</p><br><br>
-    </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+    </svg></span>
+    <input  class="form-control"  type="text" placeholder="Enter your username ,username should contain only lowercase letters" name="usernm" onfocusout="loadDoc(this.value)" required></input><p id="vl1" style="color:red">.</p><br><br>
+  </div><br><br>
+    <div id="mail" class="input-group mb-3">
+      <span class="input-group-text" class="bi bi-envelope-fill" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+      </svg></span>
+    <input  class="form-control"  type="email" placeholder="Enter your maild" name="mail" onfocusout="loadDoc1(this.value)"  required ></input><p id="vl2" style="color:red">.</p><br><br>
+    </div><br><br>
+    <div id="ph" class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone-fill" viewBox="0 0 16 16">
+        <path d="M3 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2zm6 11a1 1 0 1 0-2 0 1 1 0 0 0 2 0z"/>
+      </svg></span>
+     <input  class="form-control"  type="tel" placeholder="Enter your phone number " name="phno" onfocusout="loadDoc2(this.value)"required><p id="vl3" style="color:red">.</p><br><br>
+    </div><br><br>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+      </svg></span>
         <input  class="form-control" type="password" placeholder="Enter your password" name="pass" onfocusout="passwordck(this.value)" required><p id="vl4" style="color:red">.</p><br><br>
-     <input  class="form-control"  type="password" placeholder="confirm password" onfocusout="passwordck(this.value)" required><p id="vl5" style="color:red"></p><br><br>
-    <input  class="btn btn-primary" type="submit" value="submit"><br><br>
+    </div><br><br>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+      </svg></span>
+        <input  class="form-control"  type="password" placeholder="confirm password" onfocusout="passwordck(this.value)" required><p id="vl5" style="color:red"></p><br><br>
+    </div><br><br>
+        <input  class="btn btn-primary" type="submit" value="submit"><br><br>
     <a href="http://127.0.0.1:5000/">Allready have an account ? login here...</a>
 </form>
+</div>
 </div>
 
 </body>
